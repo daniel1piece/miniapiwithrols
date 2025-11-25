@@ -1,0 +1,14 @@
+import express from 'express';
+
+import userRouter from './routes/user.route.js';
+import taskRouter from './routes/task.router.js';
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use('/api/v1/users/', userRouter);
+app.use('/api/v1/tasks/', taskRouter);
+
+export default app;
