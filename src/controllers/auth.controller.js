@@ -10,6 +10,9 @@ export const login = async(req, res) => {
         const user = await verifyPasswrd(email, passwrd);
         if (!user) return res.status(401).json({ message: "Verifique sus credenciales" });
 
+        console.log(user);
+        
+
         // Crear token
         const token = jwt.sign(
             { id: user.id, email: user.email },
@@ -37,12 +40,14 @@ export const login = async(req, res) => {
 
 export const logout = async(req, res) => {
     try {
+         console.log("test");
         const authHeader = req.headers["authorization"];
         if (!authHeader) return res.status(401).json({ message: "Necesita autorización" });
-
+       
         const token = authHeader.split(" ")[1];
         if (!token) return res.status(401).json({ message: "Formato de autorización inválido" });
-
+        
+        
         const tokenDeleted = await deleteToken(token);
         if(!tokenDeleted) return res.status(400).json({ message: "No se pudo cerrar la sesión. Token inválido." });
 

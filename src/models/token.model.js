@@ -7,7 +7,10 @@ export const saveToken = async (userId, token) => {
 };
 
 export const isTokenActive = async (token) => {
+    console.log("hey2");
     const [rows] = await pool.query('SELECT * FROM active_token WHERE token = ?;', [token]);
+    console.log("hey");
+    
     return rows[0] || null;
 };
 
