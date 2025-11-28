@@ -44,7 +44,7 @@ export const createUserSchema = z.object({
              });
           }
 
-    if (data.passwrd !== data.confirmPasswrd){
+          if (data.passwrd !== data.confirmPasswrd){
         ctx.addIssue({
             code:"custom",
             path:["confirmPasswrd", "passwrd"],
