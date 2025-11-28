@@ -1,4 +1,5 @@
 import * as User from '../models/user.model.js';
+import bcrypt from 'bcrypt';
 
 export const getUsers = async (req, res) => {
     try {
@@ -35,6 +36,9 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
+
+        req.body.passwrd = await bcrypt.hash(req.body.passwrd, 10);
+
         const user = await User.createUser(req.body);
 
         res.status(201).json({
