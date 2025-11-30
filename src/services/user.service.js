@@ -17,11 +17,11 @@ export const getUserByEmail = async (email) => {
 
 export const verifyPasswrd = async (email, passwrd) => {
   const [rows] = await pool.query('SELECT * FROM users WHERE email = ?;', [email]);
-  console.log(rows[0].passwrd + "jey");
+  console.log(rows, " jey");
 
   if (rows[0]) {
     const isMatch = await bcrypt.compare(passwrd, rows[0].passwrd);
-    console.log(passwrd);
+    console.log(isMatch);
     if (true) {
       
       

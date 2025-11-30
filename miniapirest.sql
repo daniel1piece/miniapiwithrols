@@ -1,16 +1,17 @@
-CREATE DATABASE if not EXISTS miniapirestdb;
+CREATE DATABASE IF NOT EXISTS miniapirestdb;
 use miniapirestdb;
-CREATE TABLE users (
+
+CREATE TABLE IF NOT EXISTS users (
 	id bigint PRIMARY KEY AUTO_INCREMENT,
     name varchar(100) not null,
     email varchar(100) not null unique,
-    passwrd varchar(50) not null,
+    passwrd varchar(350) not null,
     rol varchar(100) not null,
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE tasks (
+CREATE TABLE IF NOT EXISTS tasks (
  	id_task bigint PRIMARY key AUTO_INCREMENT,
     title varchar (100),
     id_user bigint,
@@ -18,5 +19,12 @@ CREATE TABLE tasks (
     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp DEFAULT CURRENT_TIMESTAMP
- )
+ );
  
+ CREATE TABLE IF NOT EXISTS active_tokens (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  token VARCHAR(1000) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);

@@ -12,10 +12,11 @@ export const verifyToken = async (req, res, next) => {
         if (!token) return res.status(401).json({message: "Formato de autorizacion invalido"});
 
         try {
-            console.log("token", token);
+            // console.log("token PPP");
             const isActive = await isTokenActive(token);
-            console.log("isActive", isActive);
+            // console.log("isActive", "authMiddleware");
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            
             req.user = decoded;
             next();            
         } catch (error) {
